@@ -73,7 +73,7 @@ var findAllRecord = async function (req, res) {
 var findOneRecord = async function (req, res) {
     var body = req.body
 
-    await db.collection(body['collection'].find({ isdeleted: false, id: body.find.id })).toArray((err, resp) => {
+    await db.collection(body['collection']).find({ isdeleted: false, id: body.find.id }).toArray((err, resp) => {
         if (!err)
             res.status(200).json(resp)
     })
@@ -85,7 +85,7 @@ app.get("/", (req, res) => {
 
 app.post('/create', createRecord)
 
-app.post('/edit', editRecord)
+app.post('/update', editRecord)
 
 app.post('/delete', deleteRecord)
 
