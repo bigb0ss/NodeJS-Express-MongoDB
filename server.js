@@ -73,7 +73,8 @@ var findAllRecord = async function (req, res) {
 var findOneRecord = async function (req, res) {
     var body = req.body
 
-    await db.collection(body['collection']).find({ isdeleted: false, id: body.find.id }).toArray((err, resp) => {
+    body['find'].isdeleted = false
+    await db.collection(body['collection']).find( body.find ).toArray((err, resp) => {
         if (!err)
             res.status(200).json(resp)
     })
